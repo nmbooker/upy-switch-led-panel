@@ -1,5 +1,7 @@
 #!/usr/bin/perl
 
+# sudo apt-get install libio-async-perl
+
 use v5.10;
 
 use IO::Async::Loop;
