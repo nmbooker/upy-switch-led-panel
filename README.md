@@ -54,6 +54,10 @@ the PyBoard, monitoring and starting the systemd jobs specified in
 
 There's an example jobtab in the 'examples' directory of this repository.
 
+In host/ you'll find an example `.service` file that should start the
+script when /dev/ttyACM0 appears on your system, and stops it when the device
+is removed.
+
 ## Copyright and License
 
 Copyright (C) 2015  Nicholas Booker <nmb@nickbooker.uk>
