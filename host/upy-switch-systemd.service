@@ -4,13 +4,11 @@ Description=uPy Switches and LEDs driver
 BindsTo=dev-ttyACM0.device
 After=dev-ttyACM0.device
 
-# TODO Update so it starts script again when re-plugged
 [Service]
 Type=simple
 ExecStart=/usr/local/sbin/upy-switch-systemd.pl
 RemainAfterExit=yes
 
-# TODO will this block multi-user if device not present?  I'd rather it didn't
 [Install]
 WantedBy=dev-ttyACM0.device
 
