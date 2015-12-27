@@ -50,7 +50,9 @@ at will.
 
 The host runs a small Perl 5 script that communicates over /dev/ttyACM0 with
 the PyBoard, monitoring and starting the systemd jobs specified in
-/usr/local/etc/upy-switch-systemd/jobtab 
+/usr/local/etc/upy-switch-systemd/jobtab
+
+There's an example jobtab in the 'examples' directory of this repository.
 
 ## Copyright and License
 
