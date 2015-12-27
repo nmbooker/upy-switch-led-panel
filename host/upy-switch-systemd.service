@@ -12,4 +12,5 @@ RemainAfterExit=yes
 
 # TODO will this block multi-user if device not present?  I'd rather it didn't
 [Install]
-WantedBy=multi-user.target
+WantedBy=dev-ttyACM0.device
+
