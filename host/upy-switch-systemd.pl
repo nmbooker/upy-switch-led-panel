@@ -1,12 +1,38 @@
 #!/usr/bin/perl
 
-# sudo apt-get install libio-async-perl
+# sudo apt-get install libio-async-perl libgetopt-long-perl
 
 use v5.10;
 
 use IO::Async::Loop;
 use IO::Async::Stream;
 use IO::Async::Timer::Periodic;
+
+use autodie qw/:io/;
+
+use Getopt::Long qw/:config gnu_getopt/;
+
+my $jobtabfile = '/usr/local/etc/upy-switch-systemd/jobtab';
+
+GetOptions('jobtab=s' => \$jobtabfile);
+
+my @jobtab = do {
+    my @t;
+    open(my $file, '<', $jobtabfile);
+    foreach (<$file>) {
+	chomp;
+	s/#.*$//;      # Strip out comments
+	next if /^\s*$/;    # Ignore lines that are all whitespace
+	if (/^\s*([a-zA-Z0-9]+)\s+([a-zA-Z0-9]+)\s+([a-zA-Z0-9]+)\s*$/) {
+	    push @t, {
+		job => $1,
+		switch => $2,
+		led => $3,
+            };
+	}
+    }
+    @t;
+};
 
 my $loop = IO::Async::Loop->new;
 
@@ -17,9 +43,6 @@ my $ser_stream = IO::Async::Stream->new(
     on_read => \&on_read_line,
     );
 
-my @jobtab = (
-    { switch => 'Y1', led => 'X1', job => 'mailme' },
-    );
 
 my %jobled = map { $_->{job} => $_->{led} } @jobtab;
 my %switchjob = map { $_->{switch} => $_->{job} } @jobtab;
