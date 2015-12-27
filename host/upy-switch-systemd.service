@@ -7,7 +7,7 @@ After=dev-ttyACM0.device
 # TODO Update so it starts script again when re-plugged
 [Service]
 Type=simple
-ExecStart=/home/nick/upy-switch-led-panel/host/upy-switch-systemd.pl
+ExecStart=/usr/local/sbin/upy-switch-systemd.pl
 RemainAfterExit=yes
 
 # TODO will this block multi-user if device not present?  I'd rather it didn't
